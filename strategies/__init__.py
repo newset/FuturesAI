@@ -10,13 +10,15 @@ strategies/__init__.py — 策略注册表
 
 import os
 from strategies.base import BaseStrategy
-from strategies.price_action import BrooksStrategy
+# from strategies.price_action import BrooksStrategy
+from strategies.ema20 import EMA20Strategy
 
 _registry: dict[str, BaseStrategy] = {
-    "price_action": BrooksStrategy(),
+    # "price_action": BrooksStrategy(),
+    "ema20": EMA20Strategy()
 }
 
-_strategy_id = os.getenv("STRATEGY_ID", "price_action")
+_strategy_id = os.getenv("STRATEGY_ID", "ema20")
 if _strategy_id not in _registry:
     raise ValueError(
         f"STRATEGY_ID={_strategy_id!r} 未注册，可用策略：{list(_registry)}"
